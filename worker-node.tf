@@ -88,7 +88,7 @@ resource "aws_eks_node_group" "workernode" {
   cluster_name    = aws_eks_cluster.eks.name
   node_group_name = "mbr-workernode"
   node_role_arn   = aws_iam_role.worker.arn
-  subnet_ids = [aws_subnet.sbr_subnet-1.id,aws_subnet.sbr_subnet-2.id]
+  subnet_ids = [aws_subnet.mbr_subnet-1.id,aws_subnet.mbr_subnet-2.id]
   capacity_type = "ON_DEMAND"
   disk_size = "20"
   instance_types = ["t3a.small"]
@@ -113,15 +113,15 @@ resource "aws_eks_node_group" "workernode" {
     aws_iam_role_policy_attachment.AmazonEKSWorkerNodePolicy,
     aws_iam_role_policy_attachment.AmazonEKS_CNI_Policy,
     aws_iam_role_policy_attachment.AmazonEC2ContainerRegistryReadOnly,
-    aws_subnet.sbr_subnet-1,
-    aws_subnet.sbr_subnet-2,
+    aws_subnet.mbr_subnet-1,
+    aws_subnet.mbr_subnet-2,
   ]
 }
 
 resource "aws_security_group" "worker_node_sg" {
   name        = "mbr-eks-sg"
   description = "Allow ssh inbound traffic"
-  vpc_id      =  aws_vpc.sbr.id
+  vpc_id      =  aws_vpc.mbr.id
 
   ingress {
     description      = "ssh access to public"

@@ -1,7 +1,7 @@
 ### eks cluster setup ###
 
 resource "aws_eks_cluster" "eks" {
-  name = "sbr-eks-play"
+  name = "mbr-eks-play"
   role_arn = aws_iam_role.master.arn
   version = 1.25
 
@@ -21,7 +21,7 @@ resource "aws_eks_cluster" "eks" {
 }
 
 resource "aws_iam_role" "master" {
-  name = "sbr-eks-master"
+  name = "mbr-eks-master"
 
   assume_role_policy = <<POLICY
 {

@@ -7,7 +7,7 @@ provider "kubernetes" {
   cluster_ca_certificate = base64decode(var.cert)
   exec {
     api_version = "client.authentication.k8s.io/v1beta1"
-    args        = ["eks", "get-token", "--cluster-name", "sbr-eks-play"]
+    args        = ["eks", "get-token", "--cluster-name", "mbr-eks-play"]
     command     = "aws"
   }
 }
@@ -20,7 +20,7 @@ provider "helm" {
     exec {
       api_version = "client.authentication.k8s.io/v1beta1"
       command     = "aws"
-      args        = ["eks", "get-token", "--cluster-name", "sbr-eks-play"]
+      args        = ["eks", "get-token", "--cluster-name", "mbr-eks-play"]
       
     }
   }

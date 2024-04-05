@@ -1,5 +1,5 @@
 resource "aws_iam_role" "worker" {
-  name = "sbr-eks-worker"
+  name = "mbr-eks-worker"
 
   assume_role_policy = <<POLICY
 {
@@ -78,7 +78,7 @@ resource "aws_iam_role_policy_attachment" "autoscaler" {
 
 resource "aws_iam_instance_profile" "worker" {
   depends_on = [aws_iam_role.worker]
-  name       = "sbr-eks-worker-profile"
+  name       = "mbr-eks-worker-profile"
   role       = aws_iam_role.worker.name
 }
 
@@ -86,14 +86,14 @@ resource "aws_iam_instance_profile" "worker" {
 
 resource "aws_eks_node_group" "workernode" {
   cluster_name    = aws_eks_cluster.eks.name
-  node_group_name = "sbr-workernode"
+  node_group_name = "mbr-workernode"
   node_role_arn   = aws_iam_role.worker.arn
   subnet_ids = [aws_subnet.sbr_subnet-1.id,aws_subnet.sbr_subnet-2.id]
   capacity_type = "ON_DEMAND"
   disk_size = "20"
   instance_types = ["t3a.small"]
   remote_access {
-    ec2_ssh_key = "sbr-aws"
+    ec2_ssh_key = "mbr-aws"
     source_security_group_ids = [aws_security_group.worker_node_sg.id]
   } 
   
@@ -119,7 +119,7 @@ resource "aws_eks_node_group" "workernode" {
 }
 
 resource "aws_security_group" "worker_node_sg" {
-  name        = "sbr-eks-sg"
+  name        = "mbr-eks-sg"
   description = "Allow ssh inbound traffic"
   vpc_id      =  aws_vpc.sbr.id
 

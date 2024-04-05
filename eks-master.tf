@@ -6,7 +6,7 @@ resource "aws_eks_cluster" "eks" {
   version = 1.25
 
   vpc_config {
-    subnet_ids = [aws_subnet.sbr_subnet-1.id,aws_subnet.sbr_subnet-2.id]
+    subnet_ids = [aws_subnet.mbr_subnet-1.id,aws_subnet.mbr_subnet-2.id]
   }
   
   depends_on = [
@@ -14,8 +14,8 @@ resource "aws_eks_cluster" "eks" {
     aws_iam_role_policy_attachment.AmazonEKSServicePolicy,
     aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
     aws_iam_role_policy_attachment.AmazonEKSVPCResourceController,
-    aws_subnet.sbr_subnet-1,
-    aws_subnet.sbr_subnet-2,
+    aws_subnet.mbr_subnet-1,
+    aws_subnet.mbr_subnet-2,
   ]
 
 }

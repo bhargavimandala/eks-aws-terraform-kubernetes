@@ -1,7 +1,7 @@
 resource "helm_release" "nginx" {
   #provider  = helm.my_cluster
-  name       = "nginx-bas"
+  name       = "nginx-mbr"
   repository = "https://charts.bitnami.com/bitnami"
   chart      = "nginx"
-  namespace = "sbr-ns"
+  namespace = "mbr-ns"
 }
